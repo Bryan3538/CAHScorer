@@ -2,13 +2,14 @@ package com.bfulton.CAHScorer.Core;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.LinkedList;
 import java.util.List;
 
 public class Game {
-	private ArrayList<Player> players;
+	private LinkedList<Player> players;
 	
 	public Game() {
-		players = new ArrayList<Player>();
+		players = new LinkedList<Player>();
 	}
 	
 	public Game(Player[] players) {
@@ -20,7 +21,7 @@ public class Game {
 	}
 	
 	public Game(Collection<Player> players) {
-		this.players = new ArrayList<Player>(players);
+		this.players = new LinkedList<Player>(players);
 	}
 	
 	public List<Player> getPlayers() {
@@ -51,5 +52,28 @@ public class Game {
 		}
 		
 		return winner;
+	}
+	
+	@Override
+	public boolean equals(Object other) {
+		boolean equal = true;
+		
+		if (other instanceof Game) {
+			Game otherGame = (Game) other;
+			
+			if(this.players.size() != otherGame.players.size()) {
+				equal = false;
+			} else {
+				for(int i = 0; i < players.size(); i++) {
+					equal = equal && this.players.get(i).equals(otherGame.players.get(i));
+					if(!equal)
+						break;
+				}
+			}
+		} else {
+			equal = false;
+		}
+		
+		return equal;
 	}
 }

@@ -43,6 +43,9 @@ public class Player {
 	public void subtractPoints(int points) {
 		if(points > 0)
 			score -= points;
+		
+		if(score < 0)
+			score = 0;
 	}
 	
 	@Override
